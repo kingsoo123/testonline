@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import {Accordion, Card, Button} from "react-bootstrap";
+import { Accordion, Card, Button } from "react-bootstrap";
 import axios from "axios";
 
 const Cards = () => {
   const [hits, setHits] = useState([]);
   function GetAllUSers() {
     axios
-      .get("http://hn.algolia.com/api/v1/search?tags=front_page")
+      .get("https://hn.algolia.com/api/v1/search?tags=front_page")
       .then((response) => {
         console.log(response.data);
         setHits(response.data.hits);
@@ -20,7 +20,7 @@ const Cards = () => {
     GetAllUSers();
   }, []);
 
-console.log("::::::::::::::::::HITS", hits);
+  console.log("::::::::::::::::::HITS", hits);
 
   const cardData = hits.map((data, i) => {
     return (
@@ -34,13 +34,33 @@ console.log("::::::::::::::::::HITS", hits);
           </Card.Header>
           <Accordion.Collapse eventKey="0">
             <Card.Body>
-              <small style={{background:'yellow', padding: 3, borderRadius: 30}}>Author</small>: {data.author}
+              <small
+                style={{ background: "yellow", padding: 3, borderRadius: 30 }}
+              >
+                Author
+              </small>
+              : {data.author}
               <br />
-              <small style={{background:'yellow', padding: 3, borderRadius: 30}}>Url</small>: {data.url}
+              <small
+                style={{ background: "yellow", padding: 3, borderRadius: 30 }}
+              >
+                Url
+              </small>
+              : {data.url}
               <br />
-              <small style={{background:'yellow', padding: 3, borderRadius: 30}}>Number of comments</small>: {data.num_comments}
-              <br/>
-              <small style={{background:'yellow', padding: 3, borderRadius: 30}}>Date created</small>: {data.created_at}
+              <small
+                style={{ background: "yellow", padding: 3, borderRadius: 30 }}
+              >
+                Number of comments
+              </small>
+              : {data.num_comments}
+              <br />
+              <small
+                style={{ background: "yellow", padding: 3, borderRadius: 30 }}
+              >
+                Date created
+              </small>
+              : {data.created_at}
             </Card.Body>
           </Accordion.Collapse>
         </Card>
